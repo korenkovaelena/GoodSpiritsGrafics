@@ -1,11 +1,11 @@
 package com.example.calculatorfx;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class HelloController {
     @FXML
@@ -51,6 +51,7 @@ public class HelloController {
         sideFieldName.setText("Введите стороны прямоугольника:");
         side5.setVisible(false);
         side4.setVisible(false);
+        countAreaButton.setOnAction(actionEvent -> calculateRectangle());
     }
 
     @FXML
@@ -60,6 +61,7 @@ public class HelloController {
         side5.setVisible(true);
         side4.setVisible(true);
         side3.setVisible(false);
+        countAreaButton.setOnAction(actionEvent -> calculateTrapezoid());
     }
 
     @FXML
@@ -69,23 +71,26 @@ public class HelloController {
         side5.setVisible(false);
         side4.setVisible(false);
         side3.setVisible(true);
-        //countAreaButton.setOnAction();
+        countAreaButton.setOnAction(actionEvent -> calculateTriangle());
+    }
+    public void initialize(){
+        switchToTriangle(null);
     }
 
-    @FXML
-    void countArea(ActionEvent event) throws ImpossibleTriangleException, NotNaturalNumberException {
-        if (switchFigure.getSelectedToggle()==triangle){
-            calculateTriangle();
-        }
-        if (switchFigure.getSelectedToggle()==rectangle){
-            calculateRectangle();
-        }
-        if (switchFigure.getSelectedToggle()==trapezoid){
-            calculateTrapezoid();
-        }
-
-    }
-    void calculateTriangle(){
+//    @FXML
+//    void countArea(ActionEvent event) throws ImpossibleTriangleException, NotNaturalNumberException {
+//        if (switchFigure.getSelectedToggle()==triangle){
+//            ;
+//        }
+//        if (switchFigure.getSelectedToggle()==rectangle){
+//           ;
+//        }
+//        if (switchFigure.getSelectedToggle()==trapezoid){
+//
+//        }
+//
+//    }
+    EventHandler<ActionEvent> calculateTriangle(){
             try {
                 double x = Double.parseDouble(side1.getText());
                 double y = Double.parseDouble(side2.getText());
@@ -104,8 +109,9 @@ public class HelloController {
                 result.setText("Можно вводить только числа");
             }
 
+        return null;
     }
-    void calculateRectangle() {
+    EventHandler<ActionEvent> calculateRectangle() {
         try {
             double x = Double.parseDouble(side1.getText());
             double y = Double.parseDouble(side2.getText());
@@ -122,8 +128,9 @@ public class HelloController {
         catch (java.lang.RuntimeException ex){
             result.setText("Можно вводить только числа");
         }
+        return null;
     }
-    void calculateTrapezoid() {
+    EventHandler<ActionEvent> calculateTrapezoid() {
         try {
             double a = Double.parseDouble(side1.getText());
             double b = Double.parseDouble(side2.getText());
@@ -131,6 +138,7 @@ public class HelloController {
             double d = Double.parseDouble(side5.getText());
 
             Trapezoid trap = new Trapezoid(a,b,c,d);
+            System.out.println(trap);
             double area = trap.area();
             result.setText(String.valueOf(area));
         }
@@ -143,5 +151,6 @@ public class HelloController {
         catch (java.lang.RuntimeException ex){
             result.setText("Можно вводить только числа");
         }
+        return null;
     }
 }

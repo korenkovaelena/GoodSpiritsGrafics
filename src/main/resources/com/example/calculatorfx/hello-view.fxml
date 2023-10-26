@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.calculatorfx.HelloController">
    <children>
-      <Button fx:id="countAreaButton" layoutX="31.0" layoutY="212.0" mnemonicParsing="false" onAction="#countArea" prefHeight="32.0" prefWidth="149.0" text="Посчитать площадь" />
+      <Button fx:id="countAreaButton" layoutX="31.0" layoutY="212.0" mnemonicParsing="false"  prefHeight="32.0" prefWidth="149.0" text="Посчитать площадь" />
       <TextField fx:id="side1" layoutX="31.0" layoutY="51.0" />
       <TextField fx:id="side2" layoutX="31.0" layoutY="83.0" />
       <TextField fx:id="side3" layoutX="31.0" layoutY="117.0" prefHeight="17.0" prefWidth="149.0" />
