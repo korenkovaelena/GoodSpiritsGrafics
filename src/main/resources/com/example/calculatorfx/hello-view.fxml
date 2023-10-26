@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.calculatorfx.HelloController">
+   <children>
+      <Button fx:id="countAreaButton" layoutX="31.0" layoutY="212.0" mnemonicParsing="false" onAction="#countArea" prefHeight="32.0" prefWidth="149.0" text="Посчитать площадь" />
+      <TextField fx:id="side1" layoutX="31.0" layoutY="51.0" />
+      <TextField fx:id="side2" layoutX="31.0" layoutY="83.0" />
+      <TextField fx:id="side3" layoutX="31.0" layoutY="117.0" prefHeight="17.0" prefWidth="149.0" />
+      <Label fx:id="sideFieldName" layoutX="17.0" layoutY="2.0" prefHeight="38.0" prefWidth="177.0" text="Введите стороны треугольника:" textAlignment="CENTER" wrapText="true" />
+      <TextArea fx:id="result" editable="false" layoutX="224.0" layoutY="50.0" prefHeight="195.0" prefWidth="149.0" wrapText="true" />
+      <Label layoutX="257.0" layoutY="13.0" text="Результат:" />
+      <RadioButton fx:id="trapezoid" layoutX="280.0" layoutY="263.0" mnemonicParsing="false" onAction="#switchToTrapezoid" text="Трапеция">
+         <toggleGroup>
+            <ToggleGroup fx:id="switchFigure" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rectangle" layoutX="149.0" layoutY="263.0" mnemonicParsing="false" onAction="#switchToRectangle" text="Прямоугольник" toggleGroup="$switchFigure" />
+      <RadioButton fx:id="triangle" layoutX="31.0" layoutY="263.0" mnemonicParsing="false" onAction="#switchToTriangle" selected="true" text="Треугольник" toggleGroup="$switchFigure" />
+      <TextField fx:id="side5" layoutX="31.0" layoutY="182.0" visible="false" />
+      <Label fx:id="sideFieldNameTrapezoid" layoutX="31.0" layoutY="111.0" prefHeight="38.0" prefWidth="149.0" text="Введите боковые стороны:" textAlignment="CENTER" visible="false" wrapText="true" />
+      <TextField fx:id="side4" layoutX="31.0" layoutY="150.0" prefHeight="17.0" prefWidth="149.0" visible="false" />
+   </children>
+</AnchorPane>
