@@ -19,13 +19,13 @@ public class Trapezoid {
         double a;
         double b;
         if (upperBase>lowerBase){
-             a = upperBase;
-             b = lowerBase;
+            b = upperBase;
+            a = lowerBase;
         }
         else
         {
-             b = upperBase;
-             a = lowerBase;
+            a = upperBase;
+            b = lowerBase;
         }
         double c = rightLeg;
         double d = leftLeg;
