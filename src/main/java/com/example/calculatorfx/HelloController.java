@@ -138,7 +138,6 @@ public class HelloController {
             double d = Double.parseDouble(side5.getText());
 
             Trapezoid trap = new Trapezoid(a,b,c,d);
-            System.out.println(trap);
             double area = trap.area();
             result.setText(String.valueOf(area));
         }
