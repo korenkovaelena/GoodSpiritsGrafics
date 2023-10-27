@@ -16,12 +16,24 @@ public class Trapezoid {
         isTrapezoidPossible();
     }
     public double area(){
-        double a =upperBase;
-        double b = lowerBase;
+        double a;
+        double b;
+        if (upperBase>lowerBase){
+             a = upperBase;
+             b = lowerBase;
+        }
+        else
+        {
+             b = upperBase;
+             a = lowerBase;
+        }
         double c = rightLeg;
         double d = leftLeg;
         double p = (a+b+c+d)/2;
-        double area = (a+b)/Math.abs(a-b)*(Math.sqrt((p-a)*(p-b)*(p-a-c)*(p-a-d)));
+        double m = Math.abs(a-b);
+        double bb =(p-a)*(p-b)*(p-a-c)*(p-a-d);
+        double sq = Math.sqrt((p-a)*(p-b)*(p-a-c)*(p-a-d));
+        double area = (a+b)/m*(sq);
         return area;
     }
     public void isTrapezoidPossibleCalc(double x, double y, double z) throws ImpossibleTriangleException {
