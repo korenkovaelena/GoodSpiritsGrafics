@@ -1,155 +1,57 @@
 package com.example.calculatorfx;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
-import java.util.InputMismatchException;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 public class HelloController {
-    @FXML
-    private TextArea result;
-
-    @FXML
-    private TextField side1;
-
-    @FXML
-    private TextField side2;
-
-    @FXML
-    private TextField side3;
-    @FXML
-    private TextField side5;
-
-    @FXML
-    private TextField side4;
 
 
     @FXML
-    private ToggleGroup switchFigure;
+    private AnchorPane anchorPane;
 
-    @FXML
-    private RadioButton rectangle;
-    @FXML
-    private RadioButton trapezoid;
 
-    @FXML
-    private RadioButton triangle;
-
-    @FXML
-    private Label sideFieldName;
-
-    @FXML
-    private Label sideFieldNameTrapezoid;
-    @FXML
-    private Button countAreaButton;
-    @FXML
-    void switchToRectangle(ActionEvent event) {
-        side3.setVisible(false);
-        sideFieldNameTrapezoid.setVisible(false);
-        sideFieldName.setText("Введите стороны прямоугольника:");
-        side5.setVisible(false);
-        side4.setVisible(false);
-        countAreaButton.setOnAction(actionEvent -> calculateRectangle());
-    }
-
-    @FXML
-    void switchToTrapezoid(ActionEvent event) {
-        sideFieldName.setText("Введите длины оснований трапеции:");
-        sideFieldNameTrapezoid.setVisible(true);
-        side5.setVisible(true);
-        side4.setVisible(true);
-        side3.setVisible(false);
-        countAreaButton.setOnAction(actionEvent -> calculateTrapezoid());
-    }
-
-    @FXML
-    void switchToTriangle(ActionEvent event) {
-        sideFieldName.setText("Введите стороны треугольника:");
-        sideFieldNameTrapezoid.setVisible(false);
-        side5.setVisible(false);
-        side4.setVisible(false);
-        side3.setVisible(true);
-        countAreaButton.setOnAction(actionEvent -> calculateTriangle());
-    }
-    public void initialize(){
-        switchToTriangle(null);
-    }
-
-//    @FXML
-//    void countArea(ActionEvent event) throws ImpossibleTriangleException, NotNaturalNumberException {
-//        if (switchFigure.getSelectedToggle()==triangle){
-//            ;
-//        }
-//        if (switchFigure.getSelectedToggle()==rectangle){
-//           ;
-//        }
-//        if (switchFigure.getSelectedToggle()==trapezoid){
-//
-//        }
-//
-//    }
-    EventHandler<ActionEvent> calculateTriangle(){
-            try {
-                double x = Double.parseDouble(side1.getText());
-                double y = Double.parseDouble(side2.getText());
-                double z = Double.parseDouble(side3.getText());
-                Triangle tr = new Triangle(x, y, z);
-                double area = tr.area();
-                result.setText(String.valueOf(area));
+    public void initialize() throws FileNotFoundException {
+        Layer[] layers = Main.readFromFile();
+        int x = 200;
+        int y = 30;
+        HashMap<String, Circle> map =new HashMap<>();
+        Circle c =new Circle();
+        c.setCenterX(x);
+        c.setCenterY(y);
+        c.setRadius(20);
+map.put("0.1", c);
+        anchorPane.getChildren().add(c);
+        for(int  i = 0; i < layers.length; i++){
+            String tonnelFrom;
+            int space = 300;
+            int sp=100;
+            int margin = space/layers[i].planets.length;
+                    for (int s = 0; s < layers[i].planets.length; s++) {
+                            Circle k = new Circle();
+                            k.setCenterX(margin+sp*s);
+                            k.setCenterY(y + 70);
+                            k.setRadius(20);
+                           String key = (String.valueOf(i+1)+"."+String.valueOf(s+1));
+                            map.put(key,k);
+                            anchorPane.getChildren().add(k);
+                            for (int j = 0; j < layers[i].planets[s].tonnels.size(); j++){
+                                tonnelFrom = i+"."+String.valueOf(layers[i].planets[s].tonnels.get(j).from);
+                                Line l = new Line();
+                    l.setStartX(map.get(tonnelFrom).getCenterX());
+                    l.setStartY(map.get(tonnelFrom).getCenterY());
+                    l.setEndX(margin+sp*s);
+                    l.setEndY(y + 70);
+                    anchorPane.getChildren().add(l);
+                            }
+                }
+                    y=y+70;
             }
-            catch (ImpossibleTriangleException | NotNaturalNumberException ex){
-                result.setText(ex.getMessage());
-            }
-            catch (InputMismatchException ex){
-                System.out.println("Нужны целые числа");
-            }
-            catch (java.lang.RuntimeException ex){
-                result.setText("Можно вводить только числа");
-            }
+        }
 
-        return null;
-    }
-    EventHandler<ActionEvent> calculateRectangle() {
-        try {
-            double x = Double.parseDouble(side1.getText());
-            double y = Double.parseDouble(side2.getText());
-            Rectangle rect = new Rectangle(x,y);
-            double area = rect.rectangleArea();
-            result.setText(String.valueOf(area));
-        }
-        catch (NotNaturalNumberException ex){
-            result.setText(ex.getMessage());
-        }
-        catch (InputMismatchException ex){
-            System.out.println("Нужны целые числа");
-        }
-        catch (java.lang.RuntimeException ex){
-            result.setText("Можно вводить только числа");
-        }
-        return null;
-    }
-    EventHandler<ActionEvent> calculateTrapezoid() {
-        try {
-            double a = Double.parseDouble(side1.getText());
-            double b = Double.parseDouble(side2.getText());
-            double c = Double.parseDouble(side4.getText());
-            double d = Double.parseDouble(side5.getText());
-
-            Trapezoid trap = new Trapezoid(a,b,c,d);
-            double area = trap.area();
-            result.setText(String.valueOf(area));
-        }
-        catch (NotNaturalNumberException | ImpossibleTriangleException ex){
-            result.setText(ex.getMessage());
-        }
-        catch (InputMismatchException ex){
-            System.out.println("Нужны целые числа");
-        }
-        catch (java.lang.RuntimeException ex){
-            result.setText("Можно вводить только числа");
-        }
-        return null;
-    }
 }
