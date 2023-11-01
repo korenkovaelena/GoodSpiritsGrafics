@@ -37,7 +37,7 @@ map.put("0.1", c);
                             k.setCenterX(margin+sp*s);
                             k.setCenterY(y + 70);
                             k.setRadius(20);
-                           String key = (String.valueOf(i+1)+"."+String.valueOf(s+1));
+                           String key = (i + 1 +"."+ (s + 1));
                             map.put(key,k);
                             anchorPane.getChildren().add(k);
                             for (int j = 0; j < layers[i].planets[s].tonnels.size(); j++){
